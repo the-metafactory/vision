@@ -31,7 +31,7 @@ Everything below serves that release.
 
 - The path from a fresh machine to an agent replying in Discord is today **~16 manual steps across 4 tools**, plus a Discord Developer Portal detour.
 - The live registry holds **one published package**. The distribution pipe is hardened; the shelf is nearly empty.
-- Capability declarations are **reviewed at publish time, not yet enforced at execution time**. By our own standard, declaration without enforcement isn't done. Closing that gap is now in flight — a community security review confirmed it, and the execution-boundary hardening ladder (cortex#2341) is the response, being built fail-closed and held at the gate by its own adversarial reviews.
+- Capability declarations are **reviewed at publish time, not yet enforced at execution time**. By our own standard, declaration without enforcement isn't done. Closing that gap is now in flight — a community security review confirmed it, and the execution-boundary hardening ladder is the response, being built fail-closed and held at the gate by its own adversarial reviews.
 - There is no `doctor` command. A silent bot has no first-class diagnostic.
 
 ## The bar (mid-2026)
@@ -66,7 +66,7 @@ Our community testers (you know who you are — thank you) found more real issue
 5. **Docs must be copy-paste executable.** Commands with `<slug>` placeholders fail; commands with `$CTX_SLUG` just work.
 6. **One digest post beats a wall of text.** How we communicate to testers is part of the product.
 
-Two community adversarial reviews have since landed and been absorbed: the security/architecture review (no auth bypass found, core rated security-mature; every finding on the hardening ladder, cortex#2341) and the README claims review (cortex#2353).
+Two community adversarial reviews have since landed and been absorbed: the security/architecture review (no auth bypass found, core rated security-mature; every finding tracked on the hardening ladder) and the README claims review (every claim now has an issue holding it to tester experience).
 
 ## The plan
 
@@ -76,20 +76,16 @@ Two community adversarial reviews have since landed and been absorbed: the secur
 
 Nothing gets promoted while the advertised path has holes.
 
-A lesson worth keeping from this phase: our own first draft listed nine correctness items, and **adversarial re-verification against main killed four of them within a day** — already fixed by in-flight work we hadn't seen. This ecosystem moves fast enough that stale claims are the main source of wasted work, which is why nothing enters the plan unverified. What actually remains:
+A lesson worth keeping from this phase: our own first draft listed nine correctness items, and **adversarial re-verification against main killed four of them within a day** — already fixed by in-flight work we hadn't seen. This ecosystem moves fast enough that stale claims are the main source of wasted work, which is why nothing enters the plan unverified.
 
-- Land `arc install` support for governance-type packages (arc#361 — the first fresh community install of compass-core crashed; fix in review).
-- Fix luna-lite's dead `dependencies:` manifest key and its broken README install URL (luna-lite#1).
-- Owns-declarations so `arc purge` fully untangles cortex and luna-stack runtime state (cortex#2338) — install symmetry is part of the trust story.
-- Make advertised claims match tester experience (cortex#2353, from the community README review).
-- Rehearse the registry-install path end-to-end against the actually-published artifact — not just the git-URL path (cortex#2287, #2289). This validates everything above and goes last.
+The shape of what remains: the governance-package install path, the starter bundle's manifest and README defects, owns-declarations so `arc purge` fully untangles runtime state (install symmetry is part of the trust story), advertised claims brought in line with tester experience, and — last, because it validates everything above — rehearsing the registry-install path end-to-end against the actually-published artifact rather than the git-URL path. The live task list is section 2 of the iteration plan.
 
 ### Phase 1 — One command to magic (weeks)
 
 The mass-market gate. Target: **fresh machine → agent replies, under 15 minutes**, measured on every release — and the command that gets measured is the Factory's.
 
 - **A real arc installer** (`curl | sh`, brew) — no more clone-and-link.
-- **The Factory as one command**: `arc install <factory>` stands up the full composition with a single combined capability review — and `arc purge <factory>` reverses it completely (arc#365). luna-lite (chat) and luna-stack (coding tier) remain the per-persona entries; names settled once, everywhere.
+- **The Factory as one command**: `arc install <factory>` stands up the full composition with a single combined capability review — and `arc purge <factory>` reverses it completely. luna-lite (chat) and luna-stack (coding tier) remain the per-persona entries; names settled once, everywhere.
 - **A guided onboarder**: interactive prompts for bot token / guild / channel (accept pasted URLs), open the pre-filled OAuth invite, explain every secret it asks for, and provision or supervise NATS instead of requiring it to pre-exist.
 - **Collapse the dual config tree.** One canonical directory, before more users form habits.
 - **`arc doctor` / `cortex doctor`.** Every silent failure a tester hit becomes a check.
@@ -99,7 +95,7 @@ The mass-market gate. Target: **fresh machine → agent replies, under 15 minute
 
 Close the distance between the trust story and its enforcement:
 
-- **Execution-time enforcement** *(in flight — cortex#2341, the EBH ladder)*: a deterministic filesystem/exec boundary around agent sessions — path containment first, kernel sandbox as the real boundary. Built fail-closed: the first code slice has been held at the merge gate while adversarial reviews killed four bypasses that green tests missed. "Declared capabilities, enforced" becomes literally true — the hard way, on purpose.
+- **Execution-time enforcement** *(in flight — section 4 of the iteration plan)*: a deterministic filesystem/exec boundary around agent sessions — path containment first, kernel sandbox as the real boundary. Built fail-closed: the first code slice has been held at the merge gate while adversarial reviews killed four bypasses that green tests missed. "Declared capabilities, enforced" becomes literally true — the hard way, on purpose.
 - **Audit the Mission Control surface** (the largest not-yet-audited component) and make the prompt filter fail closed.
 - **Signing end-to-end**: finish the Sigstore/provenance work and verify signatures on install.
 - **Publish the security story** as plain-language content. The ecosystem is drowning in "personal agents are a security nightmare" headlines; we're building the counterexample and should say so, with receipts.
