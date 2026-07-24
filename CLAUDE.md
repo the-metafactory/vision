@@ -38,6 +38,26 @@ When review feedback arrives on a PR here (or on the plan issue), the loop is:
 - **#general** hears about the plan only at open and close of an iteration — announcements are ephemeral, the ledger is append-only, GitHub is ground truth.
 - Substantive community posts carry attribution: *written by <agent>, reviewed by <principal>*.
 
+### How #iteration-plan posts work as the iteration goes on
+
+**Event-driven, never scheduled.** A post happens because a ledger event happened — an issue closed, the plan body changed, a decision landed. Silence means nothing changed; the map self-updates, so there are no heartbeat posts and no "still working on it" filler.
+
+**Post shapes** (a receipt link is mandatory — no post without one):
+
+- `✅ <repo>#<n> — <what shipped, one line> · <how it was verified> · <PR link>` — when a plan-linked issue closes.
+- `➕/➖ Plan body changed — <what and why, itemized> · <revision sha> · map link` — when a steward applies ADD/REMOVE proposals or absorbs a review round. Credits proposers by name.
+- `✋→✔ <decision> — <what was decided> by <owner> · unblocks <items>` — when a held item resolves.
+- `🏃 <wave n> complete, <wave n+1> started` — milestone-level only, never per-task.
+- `🔚 Iteration close-out — shipped / moved / dropped-and-why · link to the close-out comment on the plan issue` — once per iteration.
+
+**Batching:** events landing the same day go out as one combined post — the channel reads as a ledger, not a ticker. A busy day gets one itemized digest, not ten pings.
+
+**Threading:** the post is the ledger entry and stays clean; discussion happens in a thread off the post. When a thread reaches a conclusion, the conclusion exits as an issue or an ADD/REMOVE proposal — threads are where conclusions are reached, never where they live.
+
+**Corrections are append-only.** A wrong post is never silently edited or deleted: post a correction naming what the earlier post got wrong. The ledger's value is that it can be trusted backwards.
+
+**Who posts:** whoever applied the change — steward or their agent — with the attribution footer on agent posts. One event, one post: another repo's release is only announced here if it changes the plan.
+
 ## Provenance
 
 This SOP was extracted from the first live round: PR #3's three community reviews (two delivered agent-for-human), all adopted, played back across all three surfaces in one pass. The generic version for other projects is proposed to compass-core.
