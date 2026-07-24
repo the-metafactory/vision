@@ -44,4 +44,4 @@ Held (✋) items and their decisions belong to the named owner. Argue the case i
 
 ## Where to talk
 
-Plan-level discussion → comments on the plan issue. Work-level discussion → the linked issue. Real-time → Discord (#general for direction, the repo channels for specifics). The plan issue is not a chat: comments that aren't ADD/REMOVE/decision-discussion may be minimized to keep the trail readable.
+Plan-level discussion → comments on the plan issue, or Discord's **#iteration-plan** channel — the plan's changelog, where completions (✅), body changes (➕/➖), landed decisions (✋→✔) and close-outs (🔚) are announced. Work-level discussion → the linked issue, or the repo's own channel. Direction-level → #general. The plan issue is not a chat: comments that aren't ADD/REMOVE/decision-discussion may be minimized to keep the trail readable — and #iteration-plan is the changelog, not the record: if it matters, it has an issue.
