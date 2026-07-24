@@ -16,6 +16,8 @@ Each task is a bare issue URL in a task list. GitHub renders these with the issu
 ### Complete a task
 Do the work where it lives: PR in the owning repo, through that repo's review gate, closing the linked issue. The plan checks itself off. There is nothing to update here — closing the real issue *is* updating the plan.
 
+**Community PRs are first-class.** Anyone can pick up a plan task and open the PR — and every PR, community or core, goes through the same rigour: the owning repo's tests, its review contract, and the adversarial lanes where the work touches trust paths. One bar, not two. That's respect, not gatekeeping: your merged work carries the same guarantees as ours because it survived the same gates. Those gates have held our own work back before merge — expect the same, and expect the findings to make the work better.
+
 ### Add a task
 1. Open an issue in the repo that owns the work (the more executor-grade, the faster it moves: context, current state with evidence, steps, binary acceptance criteria, verification commands).
 2. Comment on the plan issue: `ADD: <issue-url> — <one line why it belongs in this iteration>` and name the section.
