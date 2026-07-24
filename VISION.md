@@ -54,6 +54,8 @@ Distributing processes is more dangerous than distributing code. A malicious pac
 
 This is why we start closed. Debian, not npm. Every publisher known personally. Every component reviewed by humans. Trust earned through proven contributions, never self-declared. Reputation built over months, destroyed in seconds.
 
+Closed is a publish-side stance, not a consumer-side one: **curated like Debian for publishers, effortless like npm for installers.** Mass-market means consumers, not contributors.
+
 Trust is not the product. Trust is what makes the product safe enough to exist.
 
 ## The Three Layers
