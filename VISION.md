@@ -63,7 +63,7 @@ Layer 3: PROCESS COMPOSER                          ← The vision
   Capture, compose, and evolve agentic workflows
   Businesses as graphs of executable processes
 
-Layer 2: THE MARKETPLACE                           ← What we build first
+Layer 2: THE MARKETPLACE                           ← Grows at the speed of trust
   Discover, trust, install, review, endorse
   Public registry with agent-native API
 
@@ -72,7 +72,7 @@ Layer 1: RUNTIME ADAPTERS                          ← The foundation
   Any harness tomorrow
 ```
 
-We build Layer 2 first. The mission is Layer 3.
+The foundation is open and installable today; the marketplace grows at the speed of trust. The mission is Layer 3.
 
 ## What Success Looks Like
 
