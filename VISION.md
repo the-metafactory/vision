@@ -54,6 +54,8 @@ Distributing processes is more dangerous than distributing code. A malicious pac
 
 This is why we start closed. Debian, not npm. Every publisher known personally. Every component reviewed by humans. Trust earned through proven contributions, never self-declared. Reputation built over months, destroyed in seconds.
 
+Closed is a publish-side stance, not a consumer-side one. **Like Debian: a curated repository with one-command install.** Curation gates who publishes; apt-grade ease is what installers get. Mass-market means consumers, not contributors.
+
 Trust is not the product. Trust is what makes the product safe enough to exist.
 
 ## The Three Layers
@@ -63,7 +65,7 @@ Layer 3: PROCESS COMPOSER                          ← The vision
   Capture, compose, and evolve agentic workflows
   Businesses as graphs of executable processes
 
-Layer 2: THE MARKETPLACE                           ← What we build first
+Layer 2: THE MARKETPLACE                           ← Grows at the speed of trust
   Discover, trust, install, review, endorse
   Public registry with agent-native API
 
@@ -72,7 +74,7 @@ Layer 1: RUNTIME ADAPTERS                          ← The foundation
   Any harness tomorrow
 ```
 
-We build Layer 2 first. The mission is Layer 3.
+The foundation is open and installable today; the marketplace grows at the speed of trust. The mission is Layer 3.
 
 ## What Success Looks Like
 
