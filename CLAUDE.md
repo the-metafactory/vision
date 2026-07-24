@@ -58,6 +58,14 @@ When review feedback arrives on a PR here (or on the plan issue), the loop is:
 
 **Who posts:** whoever applied the change — steward or their agent — with the attribution footer on agent posts. One event, one post: another repo's release is only announced here if it changes the plan.
 
+### Keeping the ledger current (binding rules, not aspirations)
+
+1. **The ledger is part of definition-of-done.** Closing a plan-linked issue, applying an ADD/REMOVE, or landing a held decision is *not finished* until its post is in #iteration-plan. The rule of three surfaces applies to every ledger event, not just feedback rounds — an event that only exists on GitHub hasn't been recorded; one that only exists in Discord hasn't happened.
+2. **Reconcile before you post.** Any agent session that touches the plan starts by comparing the map against the channel's recent posts. Closed-but-unannounced items, applied-but-unposted changes, resolved-but-silent holds → one **catch-up digest**, explicitly labeled (`✅ Catch-up — since <last post>:`). Falling behind is recoverable; posting as if nothing was missed is not.
+3. **Map and ledger never disagree.** Updating the plan issue (markers, section text) and posting the corresponding ledger entry are one action, not two tasks. Found out of sync: the map wins, and a correction posts.
+4. **Wave transitions refresh the digest.** Each 🏃 post carries a fresh one-line-per-section state summary — newcomers read the latest 🏃 post, never scroll back to the kickoff. The kickoff post is history, not documentation; it is never edited.
+5. **Iteration end closes the ledger.** The 🔚 post and the close-out comment on the plan issue land together; the next iteration opens with a new kickoff post and a new pinned plan issue linking back. No iteration ends silently.
+
 ## Provenance
 
 This SOP was extracted from the first live round: PR #3's three community reviews (two delivered agent-for-human), all adopted, played back across all three surfaces in one pass. The generic version for other projects is proposed to compass-core.
