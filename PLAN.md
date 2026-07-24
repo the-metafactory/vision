@@ -46,8 +46,8 @@ Nobody currently combines an effortless install with an enforceable trust story.
 
 ## Positioning
 
-> **Curated like Debian for publishers, effortless like npm for installers.**
-> Mass-market means consumers, not contributors.
+> **Like Debian: a curated repository with one-command install.**
+> Curation gates who publishes; apt-grade ease is what installers get. Mass-market means consumers, not contributors.
 
 And the framing for where we are on the journey:
 
@@ -72,6 +72,13 @@ Two community adversarial reviews have since landed and been absorbed: the secur
 
 *(The task-level truth lives in the [iteration plan](https://github.com/the-metafactory/vision/issues/4); this section is the shape and the reasoning.)*
 
+### Release gates (exit criteria, not phase order)
+
+Adopted from community review of this PR — *"phase order slips under growth pressure; an exit criterion doesn't."* Two gates, named so they cannot slip:
+
+1. **First-party shelf gate.** The registry is not stocked and the one-line installer is not promoted until **session path containment is enforced in code**. Enforcement splits into a cheaper half and a deeper half — the cheaper half (path containment) gates the growth moves; the kernel sandbox remains the deeper target and does not block Phase 1.
+2. **Third-party gate.** **No non-first-party package lands on the shelf until execution-time capability enforcement is live.** Growing the install base under publish-time-only review would be a reputational fact we couldn't roll back — timed against a plan making the trust claim in public.
+
 ### Phase 0 — Correctness before promotion (days)
 
 Nothing gets promoted while the advertised path has holes.
@@ -89,7 +96,7 @@ The mass-market gate. Target: **fresh machine → agent replies, under 15 minute
 - **A guided onboarder**: interactive prompts for bot token / guild / channel (accept pasted URLs), open the pre-filled OAuth invite, explain every secret it asks for, and provision or supervise NATS instead of requiring it to pre-exist.
 - **Collapse the dual config tree.** One canonical directory, before more users form habits.
 - **`arc doctor` / `cortex doctor`.** Every silent failure a tester hit becomes a check.
-- **Stock the shelf**: publish the foundation set (cortex, the surface adapters, luna-lite, luna-stack, compass-core, the discord bundle) to the live registry. A curated foundation, not an empty pipe.
+- **Stock the shelf**: publish the foundation set (cortex, the surface adapters, luna-lite, luna-stack, compass-core, the discord bundle) to the live registry. A curated foundation, not an empty pipe. **Gated by release gate 1** — this does not ship before path containment does.
 
 ### Phase 2 — Own the trust axis (1–2 months)
 
@@ -98,6 +105,7 @@ Close the distance between the trust story and its enforcement:
 - **Execution-time enforcement** *(in flight — section 4 of the iteration plan)*: a deterministic filesystem/exec boundary around agent sessions — path containment first, kernel sandbox as the real boundary. Built fail-closed: the first code slice has been held at the merge gate while adversarial reviews killed four bypasses that green tests missed. "Declared capabilities, enforced" becomes literally true — the hard way, on purpose.
 - **Audit the Mission Control surface** (the largest not-yet-audited component) and make the prompt filter fail closed.
 - **Signing end-to-end**: finish the Sigstore/provenance work and verify signatures on install.
+- **Operational drift as a first-class safety feature** *(community-proposed)*: prevention isn't enough — a running agent can degrade in flight: context pollutes, assumptions go stale, confidence stays high. The operator loop is stop → inspect → reset to known-good → gated resume, named in the roadmap rather than left implicit under the security story. Evidence base: a community posture pass over the foundation set.
 - **Publish the security story** as plain-language content. The ecosystem is drowning in "personal agents are a security nightmare" headlines; we're building the counterexample and should say so, with receipts.
 
 ### Phase 3 — Supply and ecosystem (this quarter and beyond)
