@@ -1,8 +1,20 @@
 # metafactory — The Plan (July 2026)
 
-**Status: PROPOSAL — community input wanted.** Comment on this PR, or in Discord. Nothing here is final until it survives your review.
+**Status: PROPOSAL — community input wanted.** Comment on this PR, or in Discord. Nothing here is final until it survives your review. *(Revised 2026-07-25: the Factory named as the product; Phase 0 corrected after adversarial re-verification.)*
+
+**This document is the why.** The living plan — what's actually in flight, linked to real issues that check themselves off — is the [iteration plan](https://github.com/the-metafactory/vision/issues/4), and [ITERATION.md](ITERATION.md) explains how to engage with it. When this snapshot and the iteration plan disagree, the iteration plan wins.
 
 This is the honest version. We audited ourselves — architecture, install experience, security posture, and the market — and this document is what came out. It leans on what our field testers taught us in the last week, which was more than any internal review found.
+
+---
+
+## The product: the Factory
+
+For months this was "a collection of tools looking for a product" — a community tester's words, and he was right. The product crystallized in one exchange: **the Factory — a software factory you install.** cortex (the runtime) + a surface bundle (Discord first) + compass-core (governance) + an agent bundle (Luna, the worker). Composed, installed through arc, and — just as non-negotiable — **untangled through arc**: one command in, one command out, nothing left behind but your own data.
+
+Metafactory is the factory of factories. The MVP is the first factory off the line: install it, and you're holding the thing that builds the things. From this product flows the chain a tester asked for — product → features → user stories → tests — so that "ready" means something you can validate, not something we feel.
+
+Everything below serves that release.
 
 ---
 
@@ -19,7 +31,7 @@ This is the honest version. We audited ourselves — architecture, install exper
 
 - The path from a fresh machine to an agent replying in Discord is today **~16 manual steps across 4 tools**, plus a Discord Developer Portal detour.
 - The live registry holds **one published package**. The distribution pipe is hardened; the shelf is nearly empty.
-- Capability declarations are **reviewed at publish time, not yet enforced at execution time**. By our own standard, declaration without enforcement isn't done. Closing that gap is on this plan, not behind it.
+- Capability declarations are **reviewed at publish time, not yet enforced at execution time**. By our own standard, declaration without enforcement isn't done. Closing that gap is now in flight — a community security review confirmed it, and the execution-boundary hardening ladder (cortex#2341) is the response, being built fail-closed and held at the gate by its own adversarial reviews.
 - There is no `doctor` command. A silent bot has no first-class diagnostic.
 
 ## The bar (mid-2026)
@@ -54,27 +66,30 @@ Our community testers (you know who you are — thank you) found more real issue
 5. **Docs must be copy-paste executable.** Commands with `<slug>` placeholders fail; commands with `$CTX_SLUG` just work.
 6. **One digest post beats a wall of text.** How we communicate to testers is part of the product.
 
-An adversarial README/claims review from the community is in progress right now and will feed Phase 0/1 below.
+Two community adversarial reviews have since landed and been absorbed: the security/architecture review (no auth bypass found, core rated security-mature; every finding on the hardening ladder, cortex#2341) and the README claims review (cortex#2353).
 
 ## The plan
+
+*(The task-level truth lives in the [iteration plan](https://github.com/the-metafactory/vision/issues/4); this section is the shape and the reasoning.)*
 
 ### Phase 0 — Correctness before promotion (days)
 
 Nothing gets promoted while the advertised path has holes.
 
-- Fix surface-adapter dependency resolution so a bare cortex install can't end up with zero adapters (missing `repo:` fields in the manifest).
-- Fix `arc install` of governance-type packages (arc#361 — first fresh install of compass-core crashed).
-- Fix luna-lite's dead `dependencies:` manifest key and its broken README install URL.
-- Close the release-gate integrity issues: macOS healthy-boot gate reading the wrong log path (cortex#2282), config-fix re-runs not restarting the daemon (cortex#2283), owns-declarations so `arc purge` fully applies to cortex (cortex#2338).
-- Wire or remove the unwired guard hook found in field testing (cortex#2331).
-- Rehearse the registry-install path end-to-end against the actually-published artifact — not just the git-URL path.
+A lesson worth keeping from this phase: our own first draft listed nine correctness items, and **adversarial re-verification against main killed four of them within a day** — already fixed by in-flight work we hadn't seen. This ecosystem moves fast enough that stale claims are the main source of wasted work, which is why nothing enters the plan unverified. What actually remains:
+
+- Land `arc install` support for governance-type packages (arc#361 — the first fresh community install of compass-core crashed; fix in review).
+- Fix luna-lite's dead `dependencies:` manifest key and its broken README install URL (luna-lite#1).
+- Owns-declarations so `arc purge` fully untangles cortex and luna-stack runtime state (cortex#2338) — install symmetry is part of the trust story.
+- Make advertised claims match tester experience (cortex#2353, from the community README review).
+- Rehearse the registry-install path end-to-end against the actually-published artifact — not just the git-URL path (cortex#2287, #2289). This validates everything above and goes last.
 
 ### Phase 1 — One command to magic (weeks)
 
-The mass-market gate. Target: **fresh machine → agent replies, under 15 minutes**, measured on every release.
+The mass-market gate. Target: **fresh machine → agent replies, under 15 minutes**, measured on every release — and the command that gets measured is the Factory's.
 
 - **A real arc installer** (`curl | sh`, brew) — no more clone-and-link.
-- **One advertised command per persona**: luna-lite for chat, luna-stack for the coding tier. Names settled once, everywhere.
+- **The Factory as one command**: `arc install <factory>` stands up the full composition with a single combined capability review — and `arc purge <factory>` reverses it completely (arc#365). luna-lite (chat) and luna-stack (coding tier) remain the per-persona entries; names settled once, everywhere.
 - **A guided onboarder**: interactive prompts for bot token / guild / channel (accept pasted URLs), open the pre-filled OAuth invite, explain every secret it asks for, and provision or supervise NATS instead of requiring it to pre-exist.
 - **Collapse the dual config tree.** One canonical directory, before more users form habits.
 - **`arc doctor` / `cortex doctor`.** Every silent failure a tester hit becomes a check.
@@ -84,7 +99,7 @@ The mass-market gate. Target: **fresh machine → agent replies, under 15 minute
 
 Close the distance between the trust story and its enforcement:
 
-- **Execution-time enforcement**: a deterministic filesystem/exec boundary around agent sessions — path containment first, kernel sandbox as target. "Declared capabilities, enforced" becomes literally true.
+- **Execution-time enforcement** *(in flight — cortex#2341, the EBH ladder)*: a deterministic filesystem/exec boundary around agent sessions — path containment first, kernel sandbox as the real boundary. Built fail-closed: the first code slice has been held at the merge gate while adversarial reviews killed four bypasses that green tests missed. "Declared capabilities, enforced" becomes literally true — the hard way, on purpose.
 - **Audit the Mission Control surface** (the largest not-yet-audited component) and make the prompt filter fail closed.
 - **Signing end-to-end**: finish the Sigstore/provenance work and verify signatures on install.
 - **Publish the security story** as plain-language content. The ecosystem is drowning in "personal agents are a security nightmare" headlines; we're building the counterexample and should say so, with receipts.
@@ -104,4 +119,4 @@ Close the distance between the trust story and its enforcement:
 
 ---
 
-*This plan is a snapshot. Issues referenced live in the public repos ([cortex](https://github.com/the-metafactory/cortex), [arc](https://github.com/the-metafactory/arc)) and are the source of truth for status.*
+*This plan is a snapshot — the why. The living map is the [iteration plan](https://github.com/the-metafactory/vision/issues/4) ([how to engage](ITERATION.md)); the linked issues in the owning repos ([cortex](https://github.com/the-metafactory/cortex), [arc](https://github.com/the-metafactory/arc), and friends) are the source of truth for status. We also hold the MVP against external critiques on their merits: [WSFF](https://github.com/the-metafactory/vision/issues/5) (why software factories fail) and a [provider-terms exposure review](https://github.com/the-metafactory/vision/issues/6) for honest user documentation.*
