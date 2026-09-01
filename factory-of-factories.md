@@ -136,3 +136,42 @@ VISION.md's stack restated in tower terms:
 The mission line survives translation intact: *every way agents do
 work can be captured (M0→M1), shared (M1 under M2 governance), and
 improved (the loop closing through M0 again).*
+
+## The example that makes it concrete: one verdict, three factories
+
+The tower stops being abstract at a single line of test output. The
+[assay](https://github.com/the-metafactory/assay) runner stamps every
+corpus verdict with `cortex@<sha> · env@<digest>`: which build of the
+software under test, standing on which environment.
+
+Each half of that stamp is a factory speaking:
+
+- The **software factory** produced the `cortex@<sha>` — a checkout
+  installed at an exact pin by
+  [arc](https://github.com/the-metafactory/arc), and the install
+  proves the pin rather than trusting it.
+- The **infrastructure factory**
+  ([crucible](https://github.com/the-metafactory/crucible)) produced
+  the `env@<digest>` — a VM manufactured from a spec, fingerprinted,
+  and identified by nothing mutable: destroy it, rebuild it, and the
+  digest either matches or the environment must explain itself.
+- The **test factory** (assay) consumed both and issued the receipt:
+  a verdict that names the exact software and the exact floor it
+  stood on, so a finding that fails to reproduce elsewhere is
+  *environment drift on the record*, not an argument.
+
+In tower terms: the run is M0, the stamped receipt is that trace
+captured into an M1 model, and the interchange contract between the
+factories —
+[`environments/README.md`](https://github.com/the-metafactory/assay/blob/main/environments/README.md),
+which defines the file one factory writes and the other reads — is M2
+doing its one job: letting factories built by different people, on
+different providers, stay legible to each other at a seam instead of
+an integration project.
+
+This is also the honest state of the warning label: the wiring is
+tracked in
+[crucible#24](https://github.com/the-metafactory/crucible/issues/24),
+and until the first factory-built run lands, the example above is a
+contract, not yet a receipt. The base layer ships first; this
+document gets to cite the receipt only after it exists.
