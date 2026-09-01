@@ -169,6 +169,15 @@ doing its one job: letting factories built by different people, on
 different providers, stay legible to each other at a seam instead of
 an integration project.
 
+And the recursion that earns the name: the software factory built
+the other two. assay and crucible are themselves products of
+cortex-driven dev loops, installed by arc, reviewed through pilot —
+and the verdicts assay issues test the software factory's own
+product. The factory of factories is not a fourth factory standing
+outside the three; it is the loop the three close.
+
+![The factory that builds the factories](assets/factory-of-factories-recursion.jpg)
+
 This is also the honest state of the warning label: the wiring is
 tracked in
 [crucible#24](https://github.com/the-metafactory/crucible/issues/24),
