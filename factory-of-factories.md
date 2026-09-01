@@ -151,7 +151,10 @@ Each half of that stamp is a factory speaking:
   [arc](https://github.com/the-metafactory/arc), and the install
   proves the pin rather than trusting it.
 - The **infrastructure factory**
-  ([crucible](https://github.com/the-metafactory/crucible)) produced
+  ([crucible](https://github.com/the-metafactory/crucible), whose
+  reference implementation is
+  [smithy](https://github.com/vpzed-dev/smithy) — a community
+  workshop below the provider seam) produced
   the `env@<digest>` — a VM manufactured from a spec, fingerprinted,
   and identified by nothing mutable: destroy it, rebuild it, and the
   digest either matches or the environment must explain itself.
@@ -170,13 +173,31 @@ different providers, stay legible to each other at a seam instead of
 an integration project.
 
 And the recursion that earns the name: the software factory built
-the other two. assay and crucible are themselves products of
-cortex-driven dev loops, installed by arc, reviewed through pilot —
-and the verdicts assay issues test the software factory's own
-product. The factory of factories is not a fourth factory standing
-outside the three; it is the loop the three close.
+the other two — and that factory is more than its tools. It is
+cortex agents and arc installs, but just as much the process:
+[compass](https://github.com/the-metafactory/compass)'s SOPs that
+run the loop — plan-breakdown turning frontier plans into
+executor-grade issues, the dev loop dispatching clean-room builders,
+the code-review-and-fix cycle gating every merge. assay and crucible
+are products of that loop, and the verdicts assay issues test the
+loop's own product. Honest-tense applies here too: today the
+narrating agent drives its communication surface through Discord
+skills rather than through cortex adapters — the factory's process
+is ahead of its plumbing, and the gap is recorded, not hidden. What
+keeps the line moving between desk sessions is Claude Code's remote
+control: the operator steers the same running sessions from
+anywhere, so the factory floor never waits for a chair. The
+factory of factories is not a fourth factory standing outside the
+three; it is the loop the three close.
 
 ![The factory that builds the factories](assets/factory-of-factories-recursion.jpg)
+
+And the software factory itself, exploded — the operator steering by
+remote control, the agent substrate, the SOPs (with the session task
+list as the plan-breakdown's wave ledger), the skills, and the hand
+tools, with smithy tagged where the products land:
+
+![Inside the software factory](assets/software-factory-exploded.jpg)
 
 This is also the honest state of the warning label: the wiring is
 tracked in
